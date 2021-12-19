@@ -70,21 +70,34 @@ def append_lists_p2(i):
     l2_p2.append(i[-1])
     l3_p2.append(i)
 
+def quit_function(param):
+    global quit
+    if param == 'quit':
+        quit = True
+
 x = None
-
+quit = False
 print(gui)
-
+playtime_count = 0
 while x is None:
     while True:
         p1_input = input('(P1) Row and Column number: ')
         if p1_input in gui:
             append_lists_p1(p1_input)
+            playtime_count += 1
             gui = gui.replace(p1_input, color_yellow + '"X"' + color_green)
             print(gui)
+            break
+        elif p1_input == 'quit':
+            quit_function(p1_input)
             break
         else:
             print('Row and Column ->> not valid OR already taken!')
             continue
+    if playtime_count == 9:
+        quit = True
+    if quit:
+        break
     list_checker_p1()
     if x is True:
         continue
@@ -92,10 +105,18 @@ while x is None:
         p2_input = input('(P2) Row and Column number: ')
         if p2_input in gui:
             append_lists_p2(p2_input)
+            playtime_count += 1
             gui = gui.replace(p2_input, color_yellow + '"O"' + color_green)
             print(gui)
+            break
+        elif p2_input == 'quit':
+            quit_function(p2_input)
             break
         else:
             print('Row and Column ->> not valid OR already taken!')
             continue
+    if playtime_count == 9:
+        quit = True
+    if quit:
+        break
     list_checker_p2()
