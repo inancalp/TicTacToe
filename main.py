@@ -1,8 +1,16 @@
-
-
 ######## _________________TIC-TAC-TOE_________________ ########
 
-gui = """
+
+# official code for color yellow = '\033[93m' should be represented as string
+
+color_yellow = '\033[93m'
+color_green = '\033[92m'
+
+# original color for CLI: (need to be added at the end of sting to keep the balance)
+
+color_white = '\033[0m'
+
+gui = color_green + """
     -------------------------
     | (1,1) | (1,2) | (1,3) |
     -------------------------
@@ -10,7 +18,7 @@ gui = """
     -------------------------
     | (3,1) | (3,2) | (3,3) |
     -------------------------
-"""
+""" + color_white
 
 s1 = {'1,1', '2,2', '3,3'}
 s2 = {'3,1', '2,2', '1,3'}
@@ -71,7 +79,7 @@ while x is None:
         p1_input = input('(P1) Row and Column number: ')
         if p1_input in gui:
             append_lists_p1(p1_input)
-            gui = gui.replace(p1_input, '"X"')
+            gui = gui.replace(p1_input, color_yellow + '"X"' + color_green)
             print(gui)
             break
         else:
@@ -84,7 +92,7 @@ while x is None:
         p2_input = input('(P2) Row and Column number: ')
         if p2_input in gui:
             append_lists_p2(p2_input)
-            gui = gui.replace(p2_input, '"O"')
+            gui = gui.replace(p2_input, color_yellow + '"O"' + color_green)
             print(gui)
             break
         else:
