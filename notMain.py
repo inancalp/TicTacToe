@@ -9,4 +9,6 @@ ENDC = '\033[0m'
 BOLD = '\033[1m'
 UNDERLINE = '\033[4m'
 
-print(ENDC + "Warning: No active frommets remain. Continue?")
+print(BOLD +  "Warning: No active frommets remain. Continue?" + ENDC)
+
+print('hello')
