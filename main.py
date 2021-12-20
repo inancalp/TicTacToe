@@ -235,7 +235,6 @@ while x is None:
     if playtime_count == 9:
         end = True
         print(text_red(text_bold('It\'s a DRAW')))
-        score()
         l1_p1 = []
         l2_p1 = []
         l3_p1 = []
@@ -244,7 +243,7 @@ while x is None:
         l3_p2 = []
         playtime_count = 0
         renew_gui()
-        print(gui)
+        score()
     if end:
         continue
     list_checker_p1()
@@ -277,7 +276,6 @@ while x is None:
     if playtime_count == 9:
         end = True
         print(text_red(text_bold('It\'s a DRAW')))
-        score()
         l1_p1 = []
         l2_p1 = []
         l3_p1 = []
@@ -286,7 +284,7 @@ while x is None:
         l3_p2 = []
         playtime_count = 0
         renew_gui()
-        print(gui)
+        score()
     if end:
         continue
     list_checker_p2()
