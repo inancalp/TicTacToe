@@ -5,7 +5,8 @@
 color_yellow = '\033[93m'
 color_green = '\033[92m'
 color_red = '\033[91m'
-# original color for CLI: (need to be added at the end of sting to keep the balance)
+
+# original color for CLI: (need to be added at the end of string to keep the balance)
 
 color_white = '\033[0m'
 
@@ -23,6 +24,7 @@ gui = color_green + """
     | (3,1) | (3,2) | (3,3) |
     -------------------------
 """ + color_white
+
 possible_inputs = ['1,1', '1,2', '1,3', '2,1', '2,2', '2,3', '3,1', '3,2', '3,3']
 s1 = {'1,1', '2,2', '3,3'}
 s2 = {'3,1', '2,2', '1,3'}
@@ -50,11 +52,11 @@ def score():
     global x
     global player1_point
     global player2_point
-    print(color_red + " P1:" + str(player1_point) + ", P2:" + str(player2_point) + color_white)
+    print(text_bold(text_yellow(' SCOREBOARD:')) + " P1:" + text_red(f'"{str(player1_point)}"') + ", P2:" + text_red(
+        f'"{str(player2_point)}"') + color_white)
     print('')
     if not x:
         print(gui)
-
 
 
 def renew_gui():
@@ -83,8 +85,13 @@ def list_checker_p1():
         global playtime_count
         renew_gui()
         player1_point += 1
+        score()
         if player1_point == 3:
             x = True
+        else:
+            print(text_yellow("It's P2's TURN"))
+            print('')
+
         l1_p1.clear()
         l2_p1.clear()
         l3_p1.clear()
@@ -94,24 +101,24 @@ def list_checker_p1():
         playtime_count = 0
 
     if l1_p1.count(l1_p1[-1]) == 3:
-        print('P1 +1')
+        print(' P1 +1')
         mess1()
-        score()
+        # score()
 
     elif l2_p1.count(l2_p1[-1]) == 3:
-        print('P1 +1')
+        print(' P1 +1')
         mess1()
-        score()
+        # score()
 
     elif s1.issubset(set(l3_p1)):
-        print('P1 +1')
+        print(' P1 +1')
         mess1()
-        score()
+        # score()
 
     elif s2.issubset(set(l3_p1)):
-        print('P1 +1')
+        print(' P1 +1')
         mess1()
-        score()
+        # score()
 
 
 def list_checker_p2():
@@ -125,8 +132,13 @@ def list_checker_p2():
         global playtime_count
         renew_gui()
         player2_point += 1
+        score()
         if player2_point == 3:
             x = True
+        else:
+            print(text_yellow("It's P1's TURN"))
+            print('')
+
         l1_p1.clear()
         l2_p1.clear()
         l3_p1.clear()
@@ -136,24 +148,24 @@ def list_checker_p2():
         playtime_count = 0
 
     if l1_p2.count(l1_p2[-1]) == 3:
-        print('P2 +1')
+        print(' P2 +1')
         mess2()
-        score()
+        # score()
 
     elif l2_p2.count(l2_p2[-1]) == 3:
-        print('P2 +1')
+        print(' P2 +1')
         mess2()
-        score()
+        # score()
 
     elif s1.issubset(set(l3_p2)):
-        print('P2 +1')
+        print(' P2 +1')
         mess2()
-        score()
+        # score()
 
     elif s2.issubset(set(l3_p2)):
-        print('P2 +1')
+        print(' P2 +1')
         mess2()
-        score()
+        # score()
 
 
 # ---
@@ -198,7 +210,7 @@ def text_white(text):
 
 print('')
 print('')
-print('     ' + underline + color_yellow + text_bold('TicTacToe') + color_white)
+print('     ' + underline + color_red + text_bold('TicTacToe') + color_white)
 print('')
 print(color_yellow + '  Whoever gets 3 point first will win the game!' + color_white)
 print('')
@@ -210,7 +222,7 @@ print(gui)
 while x is None:
     while True:
         end = None
-        p1_input = input(text_bold('(P1) Row and Column number: '))
+        p1_input = input(text_bold(f'{text_yellow(" (P1)")} Row and Column number: '))
         if p1_input in possible_inputs:
             if p1_input in gui:
                 append_lists_p1(p1_input)
@@ -218,13 +230,13 @@ while x is None:
                 gui = gui.replace(p1_input, color_yellow + '"X"' + color_green)
                 print(gui)
                 break
-            elif p1_input == 'quit':
+            elif p1_input.lower() == 'quit':
                 quit_function()
                 break
             else:
                 print(text_red('Row,Column ->> TAKEN'))
                 continue
-        elif p1_input == 'quit':
+        elif p1_input.lower() == 'quit':
             quit_function()
             break
         else:
@@ -233,8 +245,8 @@ while x is None:
     if quit:
         break
     if playtime_count == 9:
-        end = True
-        print(text_red(text_bold('It\'s a DRAW')))
+        # end = True
+        print(text_red(text_bold('It\'s a DRAW(1)')))
         l1_p1 = []
         l2_p1 = []
         l3_p1 = []
@@ -244,28 +256,35 @@ while x is None:
         playtime_count = 0
         renew_gui()
         score()
-    if end:
-        continue
-    list_checker_p1()
+        print(f'Next Turn: {text_red("P2")}')
+        print('')
+    #     continue
+    # if end:
+    #     continue
+    try:
+        list_checker_p1()
+    except IndexError:
+        pass
     if x:
         continue
     while True:
         end = None
-        p2_input = input(text_bold('(P2) Row and Column number: '))
+        p2_input = input(text_bold(f'{text_yellow(" (P2)")} Row and Column number: '))
         if p2_input in possible_inputs:
             if p2_input in gui:
                 append_lists_p2(p2_input)
                 playtime_count += 1
                 gui = gui.replace(p2_input, color_yellow + '"O"' + color_green)
                 print(gui)
+                # print('')
                 break
-            elif p2_input == 'quit':
+            elif p2_input.lower() == 'quit':
                 quit_function()
                 break
             else:
                 print(text_red('Row,Column ->> TAKEN'))
                 continue
-        elif p2_input == 'quit':
+        elif p2_input.lower() == 'quit':
             quit_function()
             break
         else:
@@ -275,7 +294,7 @@ while x is None:
         break
     if playtime_count == 9:
         end = True
-        print(text_red(text_bold('It\'s a DRAW')))
+        print(text_red(text_bold('It\'s a DRAW(2)')))
         l1_p1 = []
         l2_p1 = []
         l3_p1 = []
@@ -285,9 +304,15 @@ while x is None:
         playtime_count = 0
         renew_gui()
         score()
+        print(f'Next Turn: {text_red("P1")}')
+        print('')
+        continue
     if end:
         continue
-    list_checker_p2()
+    try:
+        list_checker_p2()
+    except IndexError:
+        pass
 
 if player1_point == 3:
     print(text_bold("P1 WON"))
