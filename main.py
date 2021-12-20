@@ -52,8 +52,11 @@ def score():
     global x
     global player1_point
     global player2_point
+    print('')
+    print('----------------------------')
     print(text_bold(text_yellow(' SCOREBOARD:')) + " P1:" + text_red(f'"{str(player1_point)}"') + ", P2:" + text_red(
         f'"{str(player2_point)}"') + color_white)
+    print('----------------------------')
     print('')
 
 
@@ -93,21 +96,21 @@ def list_checker_p1():
             x = True
         else:
             print(gui)
-            print(text_yellow("It's P2's TURN"))
+            print(text_yellow("It's (P2)'s TURN"))
             print('')
         clear_game_data()
 
     if l1_p1.count(l1_p1[-1]) == 3:
-        print(text_bold(' P1 +1'))
+        print(text_bold(f' {text_yellow("(P1)")} +1'))
         mess1()
     elif l2_p1.count(l2_p1[-1]) == 3:
-        print(text_bold(' P1 +1'))
+        print(text_bold(f' {text_yellow("(P1)")} +1'))
         mess1()
     elif s1.issubset(set(l3_p1)):
-        print(text_bold(' P1 +1'))
+        print(text_bold(f' {text_yellow("(P1)")} +1'))
         mess1()
     elif s2.issubset(set(l3_p1)):
-        print(text_bold(' P1 +1'))
+        print(text_bold(f' {text_yellow("(P1)")} +1'))
         mess1()
 
 
@@ -128,16 +131,16 @@ def list_checker_p2():
         clear_game_data()
 
     if l1_p2.count(l1_p2[-1]) == 3:
-        print(text_bold(' P2 +1'))
+        print(text_bold(f' {text_yellow("(P2)")} +1'))
         mess2()
     elif l2_p2.count(l2_p2[-1]) == 3:
-        print(text_bold(' P2 +1'))
+        print(text_bold(f' {text_yellow("(P2)")} +1'))
         mess2()
     elif s1.issubset(set(l3_p2)):
-        print(text_bold(' P2 +1'))
+        print(text_bold(f' {text_yellow("(P2)")} +1'))
         mess2()
     elif s2.issubset(set(l3_p2)):
-        print(text_bold(' P2 +1'))
+        print(text_bold(f' {text_yellow("(P2)")} +1'))
         mess2()
 
 
@@ -216,18 +219,20 @@ while x is None:
     if finish:
         break
     if playtime_count == 9:
-        print(text_red(text_bold('It\'s a DRAW(1)')))
+        print(text_bold(' DRAW'))
         clear_game_data()
         renew_gui()
         score()
-        print(f'Next Turn: {text_red("(P2)")}')
+        print(gui)
+        print(text_yellow("It's (P2)'s TURN"))
         print('')
     try:
         list_checker_p1()
     except IndexError:
         pass
     if x:
-        print(text_bold(text_red("(P1) WON !!!")))
+        print(f" {text_yellow('(P1)')} WON !!!")
+        print('')
         break
     while True:
         end = None
@@ -255,11 +260,13 @@ while x is None:
         break
     if playtime_count == 9:
         end = True
-        print(text_red(text_bold('It\'s a DRAW(2)')))
+        print(text_bold(' DRAW'))
         clear_game_data()
         renew_gui()
         score()
-        print(f'Next Turn: {text_red("(P1)")}')
+        print(gui)
+        print(text_yellow("It's (P1)'s TURN"))
+
         print('')
         continue
     if end:
@@ -269,4 +276,6 @@ while x is None:
     except IndexError:
         pass
     if x:
-        print(text_bold(text_red("(P2) WON !!!")))
+        print(f" {text_yellow('(P2)')} WON !!!")
+        print('')
+        break
