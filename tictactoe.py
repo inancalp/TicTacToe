@@ -41,7 +41,6 @@ player1_point = 0
 player2_point = 0
 playtime_count = 0
 x = None
-end = False
 finish = False
 
 
@@ -193,9 +192,10 @@ print(color_yellow + '    GL HF!!' + color_white)
 
 print(gui)
 
+# NOTE: data for "x" is stored in the messes of list checker functions for player1 and player2
+
 while x is None:
     while True:
-        end = None
         p1_input = input(text_bold(f'{text_yellow(" (P1)")} Row and Column number: '))
         if p1_input in possible_inputs:
             if p1_input in gui:
@@ -235,7 +235,6 @@ while x is None:
         print('')
         break
     while True:
-        end = None
         p2_input = input(text_bold(f'{text_yellow(" (P2)")} Row and Column number: '))
         if p2_input in possible_inputs:
             if p2_input in gui:
@@ -259,17 +258,13 @@ while x is None:
     if finish:
         break
     if playtime_count == 9:
-        end = True
         print(text_bold(' DRAW'))
         clear_game_data()
         renew_gui()
         score()
         print(gui)
         print(text_yellow("It's (P1)'s TURN"))
-
         print('')
-        continue
-    if end:
         continue
     try:
         list_checker_p2()
