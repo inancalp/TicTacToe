@@ -3,4 +3,10 @@ Here's my very first project where I put my newly learned fundamentals into acti
 
 
 # What I Learned
-['Variables and Data Types', 'Lists and Sets', 'Conditional Statements', 'Loops', 'Functions', 'String Manipulation', ...]
+- Variables and Data Types
+- Lists and Sets
+- Conditional Statements
+- Loops
+- Functions
+- String Manipulation
+- And more fundamental concepts ...
