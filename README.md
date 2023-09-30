@@ -9,4 +9,4 @@ Here's my very first project where I put my newly learned fundamentals into acti
 - Loops
 - Functions
 - String Manipulation
-- And so on...
+- Etc.
